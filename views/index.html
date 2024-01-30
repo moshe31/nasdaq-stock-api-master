@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nasdaq Stock Api</title>
+    <meta name="description" content="Nasdaq stock exchange api">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./public/style.css">
+  </head>
+  <body>
+   <div class="container">
+     <div id="main-doc">
+    
+      <div class="title">Nasdaq Stock Api</div>
+      <ul>
+        <li><b>GET</b> <br/>
+          <p class="desc">with form data containing a Nasdaq <i>stock</i> ticker e.g.</p>
+          <code>/api/stock-prices?stock=goog</code>
+          returns
+          <code>{"stockData":{"stock":"GOOG","price":"1081.22","likes":0}}</code>
+        </li>
+      
+        <li>Pass along field <i>like</i> as <b>true</b> to have your like added to the stock(s). Only 1 like per ip should be accepted.
+          <code>/api/stock-prices?stock=goog&like=true</code>
+          returns
+          <code>{"stockData":{"stock":"GOOG","price":"1081.22","likes":1}}</code>
+        </li>
+
+        <li>Pass along more then 1 stock, the return will be an array with both stock's info but instead of <i>likes</i>, it will display <i>rel_likes</i>(the difference between the likes on both) on both.
+          <code>/api/stock-prices?stock=goog&stock=msft</code>
+          returns
+          <code>{"stockData":[{"stock":"GOOG","price":"1081.22","rel_likes":0},{"stock":"MSFT","price":"106.16","rel_likes":0}]}</code>
+        </li>
+  
+      </ul>
+      
+      <h3>Example usage:</h3>
+      <code>/api/stock-prices?stock=goog</code><br>
+      <code>/api/stock-prices?stock=goog&amp;like=true</code><br>
+      <code>/api/stock-prices?stock=goog&amp;stock=msft</code><br>
+      <code>/api/stock-prices?stock=goog&amp;stock=msft&amp;like=true</code><br>
+      
+      <h3>Example return:</h3>
+      <code>{"stockData":{"stock":"GOOG","price":"1081.22","likes":1}}</code><br>
+      <code>{"stockData":[{"stock":"GOOG","price":"1081.22","rel_likes":0},{"stock":"MSFT","price":"106.16","rel_likes":0}]}</code>
+    
+    <hr>
+    
+      <div class="title">Test API Responces:</div>
+      <form id="testForm2" class="border">
+        <label>Get single price and total likes</label><br/>
+        <input type="text" name="stock" placeholder="goog" required=''>
+        <input type="checkbox" name="like" value=true style="width: 12px;"> Like?<br>
+        <button type="submit" class="button_submit">Get Price!</button>
+      </form>
+      
+      <form id="testForm" class="border">
+        <label>Compare and get relative likes</label><br/>
+        <input type="text" name="stock" placeholder="goog" required=''>
+        <input type="text" name="stock" placeholder="msft" required=''><br>
+        <input type="checkbox" name="like" value=true style="width: 12px;"> Like both?<br>
+        <button type="submit" class="button_submit">Get Price!</button>
+      </form>
+      <div id='jsonResult'></div>
+    
+    <hr>
+  </div>
+  <div class="the-guy">by <a href="https://github.com/farhankk360" target="_blank">Farhan Ullah</a></div>
+</div>
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script src="../public/script.js"></script>
+  </body>
+</html>
